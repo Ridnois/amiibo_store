@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { getZelda, selectZelda } from '../store'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Amiibo.module.css'
 
@@ -32,17 +33,20 @@ const AmiiboCard: React.FC<IAmiibo> = (props) => {
 }
 
 const AmiiboStore: NextPage = () => {
-  const [amiibos, setAmiibos] = useState<any[]>();
+  const dispatch = useAppDispatch()
+  const { amiibos, pending, error } = useAppSelector(selectZelda)
   useEffect(() => {
-    fetch("http://www.amiiboapi.com/api/amiibo/?type=figure")
-    .then(response => response.json())
-    .then(data => setAmiibos(data.amiibo))
+    dispatch(getZelda())
   }, [])
+
   useEffect(() => {
     console.log(amiibos)
-  },[amiibos])
+  }, [amiibos])
   return (
     <div className="amiibo-store">
+      <Head>
+        <title>Amiibo store</title>
+      </Head>
       <div className={styles['amiibo-nav']}>
         <div className={styles['amiibo-logo']}>
           <img alt={`amiibos logo`} width="100%" className={styles['amiibo-logo__img']} src='/logo-amiibo-glow.png'/>
@@ -52,9 +56,9 @@ const AmiiboStore: NextPage = () => {
           Cart
         </p>
       </div>
-      {amiibos && amiibos.map((amiibo) => {
-        return <AmiiboCard {...amiibo}/>
-      })}
+      {amiibos && amiibos.map((amiibo) => (
+        <AmiiboCard {...amiibo}/>
+      ))}
     </div>
   )
 }
