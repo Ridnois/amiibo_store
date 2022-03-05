@@ -1,3 +1,12 @@
+:root {
+  --logo-green: #509682;
+  --logo-yelow: #f5aa00;
+  --logo-pink: #e35b8b;
+  --logo-red: #e6001e;
+  --logo-blue: #3a9ceb;
+  --logo-green--softer: #a4c710;
+}
+
 html,
 body {
   padding: 0;
