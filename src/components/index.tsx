@@ -15,6 +15,7 @@ export const AmiiboCard: React.FC<IAmiibo> = (props) => {
         <h3 className={styles['amiibo-card__character']}>{props.character}</h3>
         <h4 className={styles['amiibo-card__series']}>{props.amiiboSeries}</h4>
       </div>
+      <AddToCart onClick={() => console.log('foo')} onCart={false} amiibo={props}/>
     </div>
   )
 }
@@ -34,4 +35,29 @@ export const AmiiboCollection: React.FC<IAmiiboCollection> = ({ collection, titl
     </div>
     </React.Fragment>
   )
+}
+
+export interface IAmiiboCart {
+  visible?: boolean;
+  articles: IAmiibo[];
+}
+
+export interface IAddToCart {
+  amiibo: IAmiibo;
+  onCart?: boolean;
+  onClick: (...args: any[]) => void;
+}
+
+export const AddToCart: React.FC<IAddToCart> = (props) => {
+  const { onCart, onClick } = props;
+  return (
+    <button className={styles['to-cart']} onClick={onClick}>{!onCart ? 'Buy' : 'On cart'}</button>
+  )
+}
+
+export const AmiiboCart: React.FC<IAmiiboCart> = ({ articles }) => {
+  return (
+    <div className='amiibo-cart'>
+      <p>{articles.length}</p>
+    </div>)
 }

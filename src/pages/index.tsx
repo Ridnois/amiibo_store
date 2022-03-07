@@ -14,6 +14,7 @@ const AmiiboStore: NextPage = () => {
   const zelda = useAppSelector(getStoreCollection('legend+of+zelda'))
   const smashBros = useAppSelector(getStoreCollection('0x00'))
   const pokemon = useAppSelector(getStoreCollection('pokemon'))
+  
   useEffect(() => {
     dispatch(getAmiiboCollection('legend+of+zelda'))
     dispatch(getAmiiboCollection('0x00'))

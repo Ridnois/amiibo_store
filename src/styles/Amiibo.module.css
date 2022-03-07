@@ -101,3 +101,12 @@
   display: flex;
   flex-firection: row;
 }
+
+.to-cart {
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  background: var(--logo-pink);
+}
