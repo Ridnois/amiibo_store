@@ -1,49 +1,28 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { AmiiboCard, AmiiboCollection } from '../components'
+import { getAmiiboCollection } from '../features/amiiboStore/amiiboActions'
+import { RootState } from '../features/store'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { getZelda, selectZelda } from '../store'
-import { useEffect, useState } from 'react'
 import styles from '../styles/Amiibo.module.css'
 
-interface IAmiibo {
-  amiiboSeries: string;
-  gameSeries: string;
-  image: string;
-  name: string;
-  character: string;
-  type: string;
-}
-
-const AmiiboCard: React.FC<IAmiibo> = (props) => {
-  return (
-    <div className={styles['amiibo-card']}>
-      <div className={styles['amiibo-card__header']}>
-        <h3 className={styles['amiibo-card__type']}>{props.type}</h3>
-      </div>
-      <div className={styles['amiibo-card__img-container']}>
-        <img className={styles['amiibo-card__image']} alt={props.character} src={props.image} />
-      </div>
-      <div className={styles['amiibo-card__content']}>
-        <h3 className={styles['amiibo-card__character']}>{props.character}</h3>
-        <h4 className={styles['amiibo-card__series']}>{props.amiiboSeries}</h4>
-      </div>
-    </div>
-    
-  )
-}
+const getStoreCollection = (collection: string) => (state: RootState) => state.amiiboStore.collections[collection];
 
 const AmiiboStore: NextPage = () => {
-  const dispatch = useAppDispatch()
-  const { amiibos, pending, error } = useAppSelector(selectZelda)
+  const dispatch = useAppDispatch();
+  const zelda = useAppSelector(getStoreCollection('legend+of+zelda'))
+  const smashBros = useAppSelector(getStoreCollection('0x00'))
   useEffect(() => {
-    dispatch(getZelda())
+    dispatch(getAmiiboCollection('legend+of+zelda'))
+    dispatch(getAmiiboCollection('0x00'))
   }, [])
-
+  
   useEffect(() => {
-    console.log(amiibos)
-  }, [amiibos])
+    console.log(zelda)
+  }, [zelda])
   return (
-    <div className="amiibo-store">
+    <div className={styles['amiibo-store']}>
       <Head>
         <title>Amiibo store</title>
       </Head>
@@ -56,10 +35,9 @@ const AmiiboStore: NextPage = () => {
           Cart
         </p>
       </div>
-      {amiibos && amiibos.map((amiibo) => (
-        <AmiiboCard {...amiibo}/>
-      ))}
-    </div>
+       { zelda && <AmiiboCollection title="Legend of zelda" collection={(zelda as any)}/> }
+       { smashBros && <AmiiboCollection title="Super smash bros" collection={(smashBros as any)}/> }
+      </div>
   )
 }
 

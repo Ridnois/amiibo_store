@@ -1,5 +1,4 @@
 .amiibo-store {
-  border: solid 1px var(--logo-red);
 }
 
 .amiibo-logo {
@@ -49,9 +48,10 @@
 .amiibo-card {
   padding: 1em;
   border-radius: 16px;
-  margin: 1em;
+  margin: 0 1em;
+  min-width: -webkit-fill-available;
   background: white;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 }
 
 .amiibo-card__series {
@@ -80,3 +80,19 @@
   margin-bottom: 8px;
 }
 
+.amiibo-collection {
+  padding: 16px;
+  padding-bottom: 50px;
+  overflow-x: scroll;
+}
+
+.amiibo-collection__title {
+  padding: 16px;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+.amiibo-collection__gallery {
+  display: flex;
+  flex-firection: row;
+}
