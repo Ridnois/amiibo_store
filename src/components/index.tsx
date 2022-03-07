@@ -6,7 +6,7 @@ export const AmiiboCard: React.FC<IAmiibo> = (props) => {
   return (
     <div className={styles['amiibo-card']}>
       <div className={styles['amiibo-card__header']}>
-        <h3 className={styles['amiibo-card__type']}>{props.type}</h3>
+        <h4 className={styles['amiibo-card__type']}>{props.type}</h4>
       </div>
       <div className={styles['amiibo-card__img-container']}>
         <img className={styles['amiibo-card__image']} alt={props.character} src={props.image} />

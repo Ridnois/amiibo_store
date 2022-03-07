@@ -46,18 +46,19 @@
 }
 
 .amiibo-card {
-  padding: 1em;
+  padding: 16px;
   border-radius: 16px;
-  margin: 0 1em;
-  min-width: -webkit-fill-available;
+  margin: 0 16px;
+  min-width: max-content;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .amiibo-card__series {
-  padding-left: 16px;
-  margin: 0;
-  margin-bottom: 1em;
+  margin: 8px;
   color: rgb(152,152,152);
 }
 
@@ -67,16 +68,16 @@
 
 .amiibo-card__image {
   margin: auto;
-  width: 30vw;
+  width: 20vw;
 }
 
 .amiibo-card__type {
-  padding: 0 16px;
+  margin: 8px;
   border-radius: 1em;
 }
 
 .amiibo-card__character {
-  padding-left: 16px;
+  margin: 8px;
   margin-bottom: 8px;
 }
 
@@ -84,6 +85,10 @@
   padding: 16px;
   padding-bottom: 50px;
   overflow-x: scroll;
+}
+
+.amiibo-collection::-webkit-scrollbar {
+  display: none;
 }
 
 .amiibo-collection__title {

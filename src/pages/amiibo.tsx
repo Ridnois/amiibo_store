@@ -10,12 +10,14 @@ import styles from '../styles/Amiibo.module.css'
 const getStoreCollection = (collection: string) => (state: RootState) => state.amiiboStore.collections[collection];
 
 const AmiiboStore: NextPage = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const zelda = useAppSelector(getStoreCollection('legend+of+zelda'))
   const smashBros = useAppSelector(getStoreCollection('0x00'))
+  const pokemon = useAppSelector(getStoreCollection('pokemon'))
   useEffect(() => {
     dispatch(getAmiiboCollection('legend+of+zelda'))
     dispatch(getAmiiboCollection('0x00'))
+    dispatch(getAmiiboCollection('pokemon'))
   }, [])
   
   useEffect(() => {
@@ -37,6 +39,7 @@ const AmiiboStore: NextPage = () => {
       </div>
        { zelda && <AmiiboCollection title="Legend of zelda" collection={(zelda as any)}/> }
        { smashBros && <AmiiboCollection title="Super smash bros" collection={(smashBros as any)}/> }
+       { pokemon && <AmiiboCollection title="Pokemon" collection={(pokemon as any)}/> }
       </div>
   )
 }
